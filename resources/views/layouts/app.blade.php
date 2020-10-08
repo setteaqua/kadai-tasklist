@@ -10,6 +10,9 @@
        
        {{--ナビゲーションバー--}}
        @include("commons.navbar")
+       
+        {{--エラーメッセージ--}}
+       @include("commons.error_message")
         
         <div class="container">
             @yield("content")
