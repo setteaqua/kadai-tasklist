@@ -63,6 +63,7 @@ class TasksController extends Controller
         //タスクを作成
         $task = new Task;
         $task->status = $request->status;
+        $task->user_id = \Auth::id();
         $task->content = $request->content;
         $task->save();
         
@@ -79,13 +80,24 @@ class TasksController extends Controller
     //getでtasks/(任意のid)にアクセスされた場合の「取得表示処理」
     public function show($id)
     {
-        //idの値でメッセージを検索して取得
-        $task = Task::findOrFail($id);
         
-        //メッセージ詳細ビューでそれを表示
-        return view("tasks.show",[
-            "task" => $task,
-        ]);
+         //idの値でメッセージを検索して取得
+            $task = Task::findOrFail($id);
+        
+
+        //認証済みユーザ（閲覧者）がそのタスクの登録者である場合は、投稿を閲覧
+        if(\Auth::id() === $task->user_id){
+            
+           
+        
+            //メッセージ詳細ビューでそれを表示
+            return view("tasks.show",[
+                "task" => $task,
+            ]);
+        }
+        else{
+           return redirect("/"); 
+        }
     }
 
     /**

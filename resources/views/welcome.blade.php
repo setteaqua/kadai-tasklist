@@ -10,12 +10,6 @@
                     </div>
                 </div>
             </aside>
-           /* <div class="col-dm-8">
-                {{--投稿フォーム--}}
-                @include("microposts.form")
-                {{--投稿一覧--}}
-                @include("microposts.microposts")
-            </div>*/
         </div>
     @else
         <div class="center jumbotron">
