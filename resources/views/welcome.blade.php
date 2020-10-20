@@ -6,10 +6,17 @@
             <aside class="col-sm-4">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{Auth::user()->naem }}</h3>
+                        <h3 class="card-title">ログインユーザー：{{Auth::user()->name }}</h3>
                     </div>
                 </div>
             </aside>
+            <div class="col-sm-8">
+                {{--タスク一覧--}}
+                @include("tasks.tasks")
+                
+                {{-- タスク作成ページへのリンク--}}
+                {!! link_to_route("tasks.create","新規タスクの登録",[],["class" =>"btn btn-primary"]) !!}
+            </div>
         </div>
     @else
         <div class="center jumbotron">
