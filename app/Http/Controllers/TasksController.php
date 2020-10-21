@@ -107,10 +107,15 @@ class TasksController extends Controller
          //idの値でメッセージを検索して取得
             $task = Task::findOrFail($id);
         
+        //認証済みユーザ（閲覧者）がそのタスクの登録者である場合は、投稿を閲覧
+        if(\Auth::id() === $task->user_id){
+        
             //メッセージ詳細ビューでそれを表示
             return view("tasks.show",[
                 "task" => $task,
             ]);
+        }
+        return redirect("/"); 
     }
 
     /**
@@ -133,9 +138,9 @@ class TasksController extends Controller
                 "task"=> $task,
             ]);
         }
-        else{
-           return redirect("/"); 
-        }
+    
+        return redirect("/"); 
+
     }
 
     /**
@@ -168,10 +173,10 @@ class TasksController extends Controller
             $task->status = $request->status;
             $task->content = $request->content;
             $task->save();
-        
-        //トップページへリダイレクトさせる
-             return redirect("/");
         }
+        //トップページへリダイレクトさせる
+        return redirect("/");
+        
     }
 
     /**
@@ -192,9 +197,9 @@ class TasksController extends Controller
         
             //メッセージを削除  
             $task->delete();
-            
+         }   
             //トップページへリダイレクトさせる
             return redirect("/");
-        }
+        
     }
 }

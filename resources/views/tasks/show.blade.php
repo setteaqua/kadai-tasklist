@@ -11,7 +11,7 @@
             <th>タスク</th>
         </tr>
         <tr>
-                v<td>{{ $task->id }}</td>
+                <td>{{ $task->id }}</td>
                 <td>{{ $task->status }}</td>    
                 <td>{{ $task->content }}</td>
         </tr>
